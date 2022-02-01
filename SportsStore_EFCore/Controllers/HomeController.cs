@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsStore_EFCore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SportsStore_EFCore.Controllers
 {
@@ -16,7 +12,11 @@ namespace SportsStore_EFCore.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index() => View(repository.Products);
+        public IActionResult Index()
+        {
+            System.Console.Clear();
+            return View(repository.Products);
+        }
 
         [HttpPost]
         public IActionResult AddProduct(Product product)
