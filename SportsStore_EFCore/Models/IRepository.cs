@@ -9,5 +9,6 @@ namespace SportsStore_EFCore.Models
         void UpdateProduct(Product product);
         Product GetProduct(long key);
         void UpdateAll(Product[] products);
+        void Delete(Product product);
     }
 }

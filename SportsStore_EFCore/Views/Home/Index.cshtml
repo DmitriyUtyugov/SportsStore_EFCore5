@@ -42,7 +42,11 @@
                         <div class="col text-right">@p.PurchasePrice</div>
                         <div class="col text-right">@p.RetailPrice</div>
                         <div class="col">
-                            <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-success">Edit</a>
+                            <form asp-action="Delete" method="post">
+                                <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-success">Edit</a>
+                                <input type="hidden" name="Id" value="@p.Id" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
                 }

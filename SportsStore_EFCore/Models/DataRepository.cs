@@ -20,6 +20,12 @@ namespace SportsStore_EFCore.Models
             this.context.SaveChanges();
         }
 
+        public void Delete(Product product)
+        {
+            context.Products.Remove(product);
+            context.SaveChanges();
+        }
+
         public Product GetProduct(long key) => context.Products.Find(key);
 
         public void UpdateAll(Product[] products)
