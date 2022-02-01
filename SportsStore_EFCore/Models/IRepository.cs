@@ -6,5 +6,8 @@ namespace SportsStore_EFCore.Models
     {
         IEnumerable<Product> Products { get; }
         void AddProduct(Product product);
+        void UpdateProduct(Product product);
+        Product GetProduct(long key);
+        void UpdateAll(Product[] products);
     }
 }
