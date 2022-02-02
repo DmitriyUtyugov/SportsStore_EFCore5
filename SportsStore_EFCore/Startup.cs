@@ -23,6 +23,7 @@ namespace SportsStore_EFCore
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddTransient<IRepository, DataRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrdersRepository, OrderRepository>();
             string connString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connString));
         }
