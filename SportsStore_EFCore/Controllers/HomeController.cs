@@ -6,15 +6,16 @@ namespace SportsStore_EFCore.Controllers
     public class HomeController : Controller
     {
         private IRepository repository;
+        private ICategoryRepository categoryRepository;
 
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, ICategoryRepository categoryRepository)
         {
             this.repository = repository;
+            this.categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
-            //System.Console.Clear();
             return View(repository.Products);
         }
 
@@ -27,13 +28,19 @@ namespace SportsStore_EFCore.Controllers
 
         public IActionResult UpdateProduct(long key)
         {
-            return View(repository.GetProduct(key));
+            ViewBag.Categories = categoryRepository.Categories;
+            return View(model: 
+                key == 0 ? new Product() : repository.GetProduct(key));
         }
 
         [HttpPost]
         public IActionResult UpdateProduct(Product product)
         {
-            repository.UpdateProduct(product);
+            if (product.Id == 0)
+                repository.AddProduct(product);
+            else
+                repository.UpdateProduct(product);
+
             return RedirectToAction(nameof(Index));
         }
 
