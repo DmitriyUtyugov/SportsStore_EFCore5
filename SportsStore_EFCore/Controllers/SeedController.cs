@@ -25,6 +25,50 @@ namespace SportsStore_EFCore.Controllers
         }
 
         [HttpPost]
+        public IActionResult CreateProductionData()
+        {
+            ClearData();
+            context.Categories.AddRange(new Category[]
+            {
+                new Category
+                {
+                    Name = "Watersports",
+                    Description = "Make a splash",
+                    Products = new Product[]
+                    {
+                        new Product { Name = "Kayak", Description = "A boat for one person", PurchasePrice = 200, RetailPrice = 275 },
+                        new Product { Name = "Lifejacket", Description = "Protective and fashionable", PurchasePrice = 30, RetailPrice = 48.95m },
+                    }
+                },
+                new Category
+                {
+                    Name = "Soccer",
+                    Description = "The wrold's favorite game",
+                    Products = new Product[]
+                    {
+                        new Product { Name = "Soccer ball", Description = "Ball", PurchasePrice = 18, RetailPrice = 19.50m },
+                        new Product { Name = "Corner Flags", Description = "Just flags", PurchasePrice = 32.50m, RetailPrice = 34.95m },
+                        new Product { Name = "Stadium", Description = "Flat-packed stadium", PurchasePrice = 75000, RetailPrice = 79500 }
+                    }
+                },
+                new Category
+                {
+                    Name = "Chess",
+                    Description = "The thinky game",
+                    Products = new Product[]
+                    {
+                        new Product { Name = "Thinking cap", Description = "Improve brain efficiency", PurchasePrice = 10, RetailPrice = 16 },
+                        new Product { Name = "Unsteady chair", Description = "Give your opponent a disadvantage", PurchasePrice = 28, RetailPrice = 29.95m },
+                        new Product { Name = "Human Chess Board", Description = "Chess board", PurchasePrice = 68.50m, RetailPrice = 75 },
+                        new Product { Name = "Bling-Bling King", Description = "Gold palted king", PurchasePrice = 800, RetailPrice = 1200 },
+                    }
+                }
+            });
+            context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
         public IActionResult CreateSeedData(int count)
         {
             ClearData();
