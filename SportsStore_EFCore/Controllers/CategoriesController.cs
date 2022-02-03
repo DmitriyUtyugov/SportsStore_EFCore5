@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsStore_EFCore.Models;
+using SportsStore_EFCore.Models.Pages;
 
 namespace SportsStore_EFCore.Controllers
 {
@@ -12,7 +13,7 @@ namespace SportsStore_EFCore.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index() => View(repository.Categories);
+        public IActionResult Index(QueryOptions options) => View(repository.GetCategories(options));
 
         [HttpPost]
         public IActionResult AddCategory(Category category)

@@ -1,5 +1,14 @@
 ﻿@model IEnumerable<Category>
 <h3 class="p-2 bg-primary text-white text-center">Categories</h3>
+<div class="text-center">
+    @Html.Partial("Pages", Model)
+    @{ 
+        ViewBag.searches = new string[] { "Name", "Description" };
+        ViewBag.sorts = new string[] { "Name", "Description" };
+    }
+    @Html.Partial("PageOptions", Model)
+</div>
+
 
 <div class="container-fluid mt-3">
     <div class="row">
