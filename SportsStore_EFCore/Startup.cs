@@ -26,6 +26,18 @@ namespace SportsStore_EFCore
             services.AddTransient<IOrdersRepository, OrderRepository>();
             string connString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connString));
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = connString;
+                options.SchemaName = "dbo";
+                options.TableName = "SessionData";
+            });
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "SportsStoreEFCore.Session";
+                options.IdleTimeout = System.TimeSpan.FromHours(48);
+                options.Cookie.HttpOnly = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +46,7 @@ namespace SportsStore_EFCore
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
         }
     }

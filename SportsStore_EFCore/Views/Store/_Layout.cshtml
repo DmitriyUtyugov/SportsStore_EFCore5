@@ -12,7 +12,7 @@
             <div class="col-auto"><h4>SPORTS STORE</h4></div>
             <div class="col"></div>
             <div class="col-auto text-lg-right">
-                (Cart Goes Here)
+                @await Component.InvokeAsync("Cart", Context.Session) 
             </div>
         </div>
     </div>
