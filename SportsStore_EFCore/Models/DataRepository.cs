@@ -31,11 +31,6 @@ namespace SportsStore_EFCore.Models
         public Product GetProduct(long key) => context.Products
             .Include(p => p.Category).First(p => p.Id == key);
 
-        //public PagedList<Product> GetProducts(QueryOptions options)
-        //{
-        //    return new PagedList<Product>(context.Products.Include(p => p.Category), options);
-        //}
-
         public PagedList<Product> GetProducts(QueryOptions options, long category = 0)
         {
             IQueryable<Product> query = context.Products.Include(p => p.Category);

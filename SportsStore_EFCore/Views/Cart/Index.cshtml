@@ -25,7 +25,7 @@
                 <div class="col">@line.Quantity</div>
                 <div class="col">@line.Product.Name</div>
                 <div class="col text-right">$@line.Product.RetailPrice.ToString("f2")</div>
-                <div class="col">$@((line.Product.RetailPrice * line.Quantity).ToString("f2"))</div>
+                <div class="col text-right">$@((line.Product.RetailPrice * line.Quantity).ToString("f2"))</div>
                 <div class="col">
                     <form asp-action="RemoveFromCart">
                         <button type="submit" name="productId" value="@line.ProductId" class="btn btn-sm btn-outline-danger">

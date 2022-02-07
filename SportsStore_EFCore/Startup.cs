@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SportsStore_EFCore.Models;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace SportsStore_EFCore
 {
@@ -20,10 +21,15 @@ namespace SportsStore_EFCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling
+                = Newtonsoft.Json.ReferenceLoopHandling.Serialize);
+
             services.AddTransient<IRepository, DataRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IOrdersRepository, OrderRepository>();
+            services.AddTransient<IWebServiceRepositroy, WebServiceRepository>();
+
             string connString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connString));
             services.AddDistributedSqlServerCache(options =>

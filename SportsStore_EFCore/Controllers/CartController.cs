@@ -62,7 +62,7 @@ namespace SportsStore_EFCore.Controllers
 
         public IViewComponentResult Invoke(ISession session)
         {
-            return new ViewViewComponentResult() 
+            return new ViewViewComponentResult()
             {
                 ViewData = new ViewDataDictionary<Cart>(ViewData, session.GetJson<Cart>("Cart"))
             };
